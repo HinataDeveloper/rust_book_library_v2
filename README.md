@@ -1,2 +1,3 @@
-# rust_book_library_v2
-Very Simple Book Library by Rust Programming Language V2
+# Rust Book Library V2
+
+Very simple book library by Rust programming language

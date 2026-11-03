@@ -1,0 +1,54 @@
+use std::collections::HashMap;
+
+use crate::{book_errors::{DeleteBookError, InsertBookError, ListBookError, SelectBookError, UpdateBookError}, entity::BookEntity};
+
+pub struct BookRepository {
+    book_list: HashMap<u64, BookEntity>,
+}
+
+impl BookRepository {
+    #[must_use]
+g    pub fn new() -> Self {
+        Self {
+            book_list: HashMap::new(),
+        }
+    }
+
+    pub fn insert(&mut self, book: BookEntity) -> Result<(), InsertBookError> {
+        match self.book_list.insert(book.id(), book) {
+            Some(_book) => Ok(()),
+            None => Err(InsertBookError),
+        }
+    }
+
+    pub fn update(&mut self, book: BookEntity) -> Result<(), UpdateBookError> {
+        if self.book_list.contains_key(&book.id()) {
+            self.book_list.entry(book.id()).or_insert(book);
+            Ok(())
+        } else {
+            Err(UpdateBookError)
+        }
+    }
+
+    pub fn delete(&mut self, book: BookEntity) -> Result<(), DeleteBookError> {
+        match self.book_list.remove(&book.id()) {
+            Some(_book) => Ok(()),
+            None => Err(DeleteBookError),
+        }
+    }
+
+    pub fn select(&self, book: BookEntity) -> Result<&BookEntity, SelectBookError> {
+        match self.book_list.get(&book.id()) {
+            Some(book) => Ok(book),
+            None => Err(SelectBookError),
+        }
+    }
+
+    pub fn list(&self) -> Result<Values<'_, u64, BookEntity>, ListBookError> {
+        if self.book_list.len() > 0 {
+            Ok(self.book_list.values())
+        } else {
+            Err(ListBookError)
+        }
+    }
+}
