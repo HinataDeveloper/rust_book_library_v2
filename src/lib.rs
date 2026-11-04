@@ -28,6 +28,7 @@
 mod book_bl;
 mod book_ctl;
 mod book_errors;
+mod book_view;
 mod core;
 mod database;
 mod entity;

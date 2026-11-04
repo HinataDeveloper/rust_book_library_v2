@@ -30,14 +30,20 @@
 fn main() {
     println!("\n");
 
+    if Data::Five > Data::Four {
+        println!("Daa::Five is greater than Data::Four");
+    } else {
+        println!("Daa::Five is less than Data::Four");
+    }
+
     println!("\nThe End ...\n");
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
 enum Data {
-    One = 1,
-    Two = 2,
+    One = 5,
+    Two = 4,
     Three = 3,
-    Four = 4,
-    Five = 5,
+    Four = 2,
+    Five = 1,
 }
