@@ -30,8 +30,7 @@ impl BookEntity {
         }
     }
 
-    #[must_use]
-    pub fn set_id(&mut self, id: u64) {
+    pub const fn set_id(&mut self, id: u64) {
         self.id = id;
     }
 

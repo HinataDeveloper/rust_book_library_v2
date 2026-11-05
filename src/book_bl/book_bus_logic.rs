@@ -60,6 +60,6 @@ impl BookBL {
     /// returns a ``Result<(), ListBookError>``.
     /// if any error occurs `Result` has ``ListBookError`` error object
     pub fn book_list(&self) -> Result<Values<'_, u64, BookEntity>, ListBookError> {
-        self.book_repo.list()
+        self.book_repo.select_all()
     }
 }

@@ -65,7 +65,7 @@ impl BookRepository {
     ///
     /// returns a ``Result<(), ListBookError>``.
     /// if any error occurs `Result` has ``ListBookError`` error object
-    pub fn list(&self) -> Result<Values<'_, u64, BookEntity>, ListBookError> {
+    pub fn select_all(&self) -> Result<Values<'_, u64, BookEntity>, ListBookError> {
         if self.book_list.is_empty() {
             Err(ListBookError)
         } else {

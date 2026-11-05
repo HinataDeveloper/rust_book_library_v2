@@ -27,8 +27,28 @@
 // Kernel Version: 7.2.15-200.fc44.x86_64
 // Firmware Version: 71CN51WW(V1.21)
 
+use book_library::BookRepository;
+use book_library::BookView;
+use book_library::MenuComm;
+use book_library::display_menu;
+use book_library::display_message;
+
 fn main() {
     println!("\n");
 
+    let br = BookRepository::new();
+    let mut bv = BookView::new(br);
+
+    'outer: loop {
+        match display_menu() {
+            MenuComm::AddBook => bv.new_existence(),
+            MenuComm::EditBook => bv.new_survive(),
+            MenuComm::RemoveBook => bv.inexistence(),
+            MenuComm::FineBook => bv.demand(),
+            MenuComm::ListBook => bv.mass_expose(),
+            MenuComm::Exit => break 'outer,
+            MenuComm::Unknown => display_message("Unknown Command ..."),
+        }
+    }
     println!("\nThe End ...\n");
 }

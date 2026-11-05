@@ -1,1 +1,2 @@
 mod book_service;
+pub use book_service::BookView;

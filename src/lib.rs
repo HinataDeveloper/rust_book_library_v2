@@ -36,3 +36,5 @@ mod entity;
 pub use book_bl::BookBL;
 pub use book_ctrl::BookCtrl;
 pub use book_da::BookRepository;
+pub use book_view::BookView;
+pub use core::{MenuComm, display_menu, display_message};
