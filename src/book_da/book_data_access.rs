@@ -1,9 +1,10 @@
-use std::collections::{HashMap, hash_map::Values};
+use std::collections::{HashMap, hash_map::Entry, hash_map::Values};
 
 use crate::{
     book_errors::{
         DeleteBookError, InsertBookError, ListBookError, SelectBookError, UpdateBookError,
     },
+    core::error_message,
     entity::BookEntity,
 };
 
@@ -25,9 +26,18 @@ impl BookRepository {
     /// returns a ``Result<(), InsertBookError>``.
     /// if any error occurs `Result` has ``InsertBookError`` error object
     pub fn insert(&mut self, book: BookEntity) -> Result<(), InsertBookError> {
-        let result = self.book_list.insert(book.id(), book);
-
-        result.map_or(Err(InsertBookError), |_book| Ok(()))
+        // let result = self.book_list.insert(book.id(), book);
+        // result.map_or(Err(InsertBookError), |_book| Ok(()))
+        match self.book_list.entry(book.id()) {
+            Entry::Vacant(vac) => {
+                vac.insert(book);
+                Ok(())
+            }
+            Entry::Occupied(_) => {
+                error_message("Duplicated book ...");
+                Err(InsertBookError)
+            }
+        }
     }
 
     /// # Errors

@@ -61,6 +61,11 @@ pub fn display_message(msg: impl AsRef<str>) {
     println!(" -> {message}");
 }
 
+pub fn error_message(msg: impl AsRef<str>) {
+    let message = msg.as_ref();
+    println!(" --->>> {message}");
+}
+
 #[must_use]
 pub fn display_menu() -> MenuComm {
     println!("\n");
