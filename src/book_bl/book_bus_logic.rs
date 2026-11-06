@@ -22,9 +22,7 @@ impl BookBL {
     /// returns a ``Result<(), InsertBookError>``.
     /// if any error occurs `Result` has ``InsertBookError`` error object
     pub fn book_register(&mut self, book: BookEntity) -> Result<(), InsertBookError> {
-        self.book_repo
-            .insert(book)
-            .map_or(Err(InsertBookError), |_book| Ok(()))
+        self.book_repo.insert(book)
     }
 
     /// # Errors
@@ -32,9 +30,7 @@ impl BookBL {
     /// returns a ``Result<(), UpdateBookError>``.
     /// if any error occurs `Result` has ``UpdateBookError`` error object
     pub fn book_edit(&mut self, book: BookEntity) -> Result<(), UpdateBookError> {
-        self.book_repo
-            .update(book)
-            .map_or(Err(UpdateBookError), |_book| Ok(()))
+        self.book_repo.update(book)
     }
 
     /// # Errors
@@ -42,9 +38,7 @@ impl BookBL {
     /// returns a ``Result<(), DeleteBookError>``.
     /// if any error occurs `Result` has ``DeleteBookError`` error object
     pub fn book_remove(&mut self, id: u64) -> Result<(), DeleteBookError> {
-        self.book_repo
-            .delete(id)
-            .map_or(Err(DeleteBookError), |_book| Ok(()))
+        self.book_repo.delete(id)
     }
 
     /// # Errors

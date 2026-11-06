@@ -3,7 +3,7 @@
 // };
 use crate::core::{get_string, get_u64_number};
 use crate::entity::BookEntity;
-use crate::{BookCtrl, BookRepository};
+use crate::{BookCtrl, BookRepository, display_message};
 // use std::collections::hash_map::Values;
 
 #[derive(Debug, Default)]
@@ -28,8 +28,8 @@ impl BookView {
         book.set_publisher(get_string("Enter book publisher name"));
         book.set_context(get_string("Enter book context"));
         match self.book_srv.book_save(book) {
-            Ok(()) => println!("Book save to database successfully ..."),
-            Err(err) => println!("  --->>> {err}"),
+            Ok(()) => display_message("Book was saved the the database successfully ..."),
+            Err(err) => println!("  ***--->>> {err}"),
         }
     }
 
@@ -42,7 +42,7 @@ impl BookView {
         book.set_publisher(get_string("Enter book publisher name"));
         book.set_context(get_string("Enter book context"));
         match self.book_srv.book_change(book) {
-            Ok(()) => println!("Book edited successfully ..."),
+            Ok(()) => display_message("Book edited successfully ..."),
             Err(err) => println!("  --->>> {err}"),
         }
     }
@@ -50,7 +50,7 @@ impl BookView {
     pub fn inexistence(&mut self) {
         let id = get_u64_number("Enter book id");
         match self.book_srv.book_erase(id) {
-            Ok(()) => println!("Book Removed successfully ..."),
+            Ok(()) => display_message("Book was Removed successfully ..."),
             Err(err) => println!("  --->>> {err}"),
         }
     }
@@ -58,7 +58,7 @@ impl BookView {
     pub fn demand(&mut self) {
         let id = get_u64_number("Enter book id");
         match self.book_srv.book_pick(id) {
-            Ok(book) => println!("{book}"),
+            Ok(book) => println!("  {book}"),
             Err(err) => println!("  --->>> {err}"),
         }
     }

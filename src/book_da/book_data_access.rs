@@ -25,9 +25,9 @@ impl BookRepository {
     /// returns a ``Result<(), InsertBookError>``.
     /// if any error occurs `Result` has ``InsertBookError`` error object
     pub fn insert(&mut self, book: BookEntity) -> Result<(), InsertBookError> {
-        self.book_list
-            .insert(book.id(), book)
-            .map_or(Err(InsertBookError), |_book| Ok(()))
+        let result = self.book_list.insert(book.id(), book);
+
+        result.map_or(Err(InsertBookError), |_book| Ok(()))
     }
 
     /// # Errors
